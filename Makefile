@@ -3,14 +3,14 @@ install:
 
 format:
 	black src/*.py
-	black test/*.py
+	black *.py
 
 test_file:
-	pytest -vv --nbval -cov=my_lib -cov=main test/test_*.py *.ipynb
+	pytest -vv --nbval -cov=my_lib -cov=main test_*.py
 
 lint:
 	ruff check src/*.py
-	ruff check test/*.py
+	ruff check *.py
 
 container-lint:
 	docker run --rm -i hadolint/hadolint < .devcontainer/Dockerfile
