@@ -38,6 +38,7 @@ def insert(connection, table_name, values):
             columns=_columns,
             values=_values,
         )
+        print(base_insert_query)
         cursor.execute(base_insert_query)
         connection.commit()
 
@@ -53,6 +54,8 @@ def read_by_id(connection, table_name, id, id_col_name="ID"):
     cursor = connection.cursor()
 
     query = f"SELECT * FROM {table_name} WHERE {id_col_name} = {id} "
+
+    print(query)
     cursor.execute(query)
 
     data = cursor.fetchone()
@@ -131,6 +134,7 @@ def update(connection, table_name, ids, update_values):
             updates=formatted_updates,
         )
 
+        print(base_update_query)
         cursor.execute(base_update_query)
         connection.commit()
         print(f"{formatted_ids} are updated successfully")
@@ -152,6 +156,8 @@ def delete(connection, table_name, ids):
             "sql/delete.sql", id=formatted_ids, table_name=table_name
         )
 
+        print(base_delete_query)
+
         cursor.execute(base_delete_query)
         connection.commit()
         print(f"{formatted_ids} are deleted successfully")
@@ -167,6 +173,7 @@ def execute_query(connection, query):
     try:
         cursor = connection.cursor()
         cursor.execute(query)
+        print(query)
         connection.commit()
         cursor.close()
         return True
