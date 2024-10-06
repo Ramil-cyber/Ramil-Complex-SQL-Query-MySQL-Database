@@ -71,36 +71,44 @@ A GitHub Actions CI/CD pipeline is configured to:
 - Validate SQL queries.
 
 ## Screenshots
-Insert_Operation
+### Insert Operation
+![Insert Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Insert_Operation.png)
 
-![Insert_Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Insert_Operation.png)
+---
 
-Analytic_Query1
+### Analytic Query 1
+![Analytic Query 1](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Analytic_Query1.png)
 
-![Analytic_Query1](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Analytic_Query1.png)
+---
 
-Analytic_Query2
+### Analytic Query 2
+![Analytic Query 2](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Analtyic_Query2.png)
 
-![Analytic_Query2](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Analtyic_Query2.png)
+---
 
-Delete_Operation
+### Delete Operation
+![Delete Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Delete_Opertion.png)
 
-![Delete_Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Delete_Opertion.png)
+---
 
-Read_Operation
+### Read Operation
+![Read Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Read_Operation.png)
 
-![Read_Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Read_Operation.png)
+---
 
-Read_Operation2
+### Read Operation 2
+![Read Operation 2](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Read_Operation2.png)
 
-![Read_Operation2](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Read_Operation2.png)
+---
 
-Transformation(elt)
+### Transformation (ETL)
+![Transformation (ETL)](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Transformation(elt).png)
 
-![Transformation(elt)](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Transformation(elt).png)
+---
 
-Update_Operation
+### Update Operation
+![Update Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Update_Operation.png)
 
-![Update_Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Update_Operation.png)
+---
 
 
