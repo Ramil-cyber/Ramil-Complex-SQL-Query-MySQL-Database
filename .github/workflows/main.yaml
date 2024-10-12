@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI Pipeline
 on:
   push:
     branches:
@@ -13,6 +13,10 @@ jobs:
         python-version: [3.11, 3.12]
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
+    env:
+      SERVER_HOSTNAME: ${{ secrets.SERVER_HOSTNAME }}
+      HTTP_PATH: ${{ secrets.HTTP_PATH }}
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -27,4 +31,4 @@ jobs:
       - name: Run Lint
         run: make lint
       - name: Run tests
-        run: make test_file
+        run: make test
