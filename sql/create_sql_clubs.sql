@@ -1,4 +1,4 @@
-CREATE TABLE football_clubs (
+CREATE TABLE IF NOT EXISTS rm564_football_clubs (
     club_id INT,
     club_code STRING,
     name STRING,

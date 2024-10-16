@@ -1,94 +1,71 @@
 from src.lib import (
-    extract_csv,
-    read_sql,
-    insert,
-    read_by_id,
-    load_csv_to_db,
-    update,
-    delete,
-    execute_query,
     connect_db,
+    extract_csv,
+    load_csv_to_db,
+    fetchall_result,
 )
+import os
 
-CSV_FILE_PATH = "data/nba_draft.csv"
-TABLE_NAME = "NbaDraft"
-TABLE_NAME_AFTER_TRANSFORMATION = "NbaDraftTransformed"
+CLUBS_REMOTE_PATH = "https://raw.githubusercontent.com/Ramil-cyber/Ramil-Complex-SQL-Query-MySQL-Database/refs/heads/main/data/clubs.csv"
+PLAYERS_REMOTE_PATH = "https://raw.githubusercontent.com/Ramil-cyber/Ramil-Complex-SQL-Query-MySQL-Database/refs/heads/main/data/players.csv"
+
+server_host_name = os.getenv("SERVER_HOSTNAME")
+http_path = os.getenv("HTTP_PATH")
+access_token = os.getenv("ACCESS_TOKEN")
 
 
-def elt_perform():
+def extract_csv_to_databricks():
 
-    connection = connect_db("data/database")
-    file_path = extract_csv()
-    load_csv_to_db(file_path, connection, "NbaDraft")
-
-    execute_query(
-        connection, query=f"DROP TABLE IF EXISTS {TABLE_NAME_AFTER_TRANSFORMATION}"
+    clubs_path = extract_csv(
+        url=CLUBS_REMOTE_PATH, file_path="clubs.csv", directory="data"
     )
-    # Create a transformed table
-    execute_query(
+
+    players_path = extract_csv(
+        url=PLAYERS_REMOTE_PATH, file_path="players.csv", directory="data"
+    )
+
+    connection = connect_db(
+        database_conn={
+            "server_hostname": server_host_name,
+            "http_path": http_path,
+            "access_token": access_token,
+        },
+    )
+
+    load_csv_to_db(
+        clubs_path,
         connection,
-        query=read_sql("sql/transform.sql", table_name=TABLE_NAME_AFTER_TRANSFORMATION),
+        table_name="rm564_football_clubs",
+        create_table_sql="sql/create_sql_clubs.sql",
     )
+
+    load_csv_to_db(
+        players_path,
+        connection,
+        table_name="rm564_football_clubs_players",
+        create_table_sql="sql/create_sql_players.sql",
+    )
+
+    connection.close()
 
     return True
 
 
-def crud_operations():
-    status = False
-
-    connection = connect_db("data/database")
-    # Read operation
-    random_id_data = read_by_id(
-        connection, TABLE_NAME_AFTER_TRANSFORMATION, id="'karl-anthony-towns'"
-    )
-    print(f"Retrieved result - {random_id_data}")
-    # Create (Insert) operation
-    inserted_row_id = insert(
-        connection, TABLE_NAME_AFTER_TRANSFORMATION, {"ID": "'ramil-mammadov1'"}
-    )
-    inserted_row_id2 = insert(
-        connection, TABLE_NAME_AFTER_TRANSFORMATION, {"ID": "'ramil-mammadov2'"}
-    )
-    print(f"Inserted Row Ids:{inserted_row_id}, {inserted_row_id2}")
-    # Update operation
-    status = update(
-        connection,
-        table_name=TABLE_NAME_AFTER_TRANSFORMATION,
-        ids=["'ramil-mammadov1'"],
-        update_values={"Position": "SF", "Player": "Ramil Mammadov"},
-    )
-    updated_id_data = read_by_id(
-        connection, TABLE_NAME_AFTER_TRANSFORMATION, id="'ramil-mammadov1'"
-    )
-    print(updated_id_data)
-    # Delete operation
-    status = delete(
-        connection,
-        table_name=TABLE_NAME_AFTER_TRANSFORMATION,
-        ids=["'ramil-mammadov2'"],
-    )
-
-    return status
-
-
 def analytical_queries():
-    connection = connect_db("data/database")
-    cursor = connection.cursor()
-    cursor.execute(read_sql(query="sql/query1.sql"))
-    print(read_sql(query="sql/query1.sql"))
-    result = cursor.fetchall()
-    print(result)
-    print("-" * 60)
-    cursor.execute(read_sql(query="sql/query2.sql"))
-    print(read_sql(query="sql/query2.sql"))
-    result2 = cursor.fetchall()
-    print(result2)
-    cursor.close()
+    connection = connect_db(
+        database_conn={
+            "server_hostname": server_host_name,
+            "http_path": http_path,
+            "access_token": access_token,
+        },
+    )
 
+    res = fetchall_result(connection, query="sql/query1.sql", query_params={})
+    print(res)
+    connection.close()
     return True
 
 
 if __name__ == "__main__":
-    elt_perform()
-    crud_operations()
+    extract_csv_to_databricks()
     analytical_queries()

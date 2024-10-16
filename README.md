@@ -1,114 +1,143 @@
-[![CI/CD](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/actions/workflows/main.yaml/badge.svg)](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/actions/workflows/main.yaml)
 
-# Python Script for Interacting with SQL Database
+# Ramil's Python Script Interacting with SQL Database
 
-This project demonstrates how to interact with a SQL database using Python. It connects to a database, performs CRUD (Create, Read, Update, Delete) operations, and executes SQL queries. The script also integrates with a CI/CD pipeline for automated testing.
+## Overview
 
-## Features
-- Connects to a SQL database.
-- Performs CRUD operations.
-- Executes at least two SQL queries.
-- Automated testing of database operations through a CI/CD pipeline.
+This project demonstrates how to interact with a SQL database using Python, involving a complex SQL query that includes joins, aggregation, and sorting. The repository covers the end-to-end process, from downloading CSV files, loading them into a database, and executing queries, all while following best practices with CI/CD integration.
 
-## Project Structure
-- `src/lib.py`: Python script that contain all  needed functions
-- `main.py`: Python script based on the functions of the lib and perform analtyical operations
-- `test_main.py`: Contains tests to validate the operations.
-- `.github/workflows/`: CI/CD pipeline configuration for automated testing.
+---
 
-## Requirements
-- Python 3.x
-- SQLite3 or any SQL database
-- `sqlite3` library: Comes pre-installed with Python
-- `pytest` testing framework
-- `black` code formatter
-- `ruff`: for testing
-- GitHub Actions for continuous integration and delivery (CI/CD)
+## Project Features
 
-## Setup Instructions
+1. **Complex SQL Query:**
+    - The project contains a SQL query that joins multiple tables, performs aggregations, and sorts the results based on the specified criteria.
+  
+2. **Python Integration:**
+    - Python scripts are used to automate downloading CSV data from remote sources, load them into a SQL database, and execute SQL queries.
 
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database.git
-    cd Ramil-Python-Script-interacting-with-SQL-Database
-    ```
-2. Install the required dependencies:
-   ```
-   make install
-   ```
-3. Format the code:
-   ```
-   make format
-   ```
-4. Lint the code:
-   ```
-   make lint
-   ```
-5. To test the scripts:
-   ```
-   make test_file
-   ```
-6. Run the Python script to connect to the SQL database and perform the operations:
-   ```
+3. **CI/CD Pipeline:**
+    - The project includes continuous integration and deployment (CI/CD) through GitHub Actions, ensuring the project is automatically tested upon each commit.
+
+---
+
+## SQL Query
+
+The SQL query in this project involves:
+- **Joins** between tables containing football club and player data.
+- **Aggregation** to calculate statistics such as the average number of goals per club.
+- **Sorting** to rank clubs by total goals scored.
+
+Example Query:
+```sql
+Select club.name  as club_name, 
+SUM(player.market_value_in_eur) as total_market_value,
+COUNT(*) as included_players
+
+from ids706_data_engineering.default.rm564_football_clubs_players player
+JOIN ids706_data_engineering.default.rm564_football_clubs club ON player.current_club_id = club.club_id
+GROUP BY club_name
+ORDER BY total_market_value DESC
+limit 20 ;
+```
+
+### Expected Results:
+- **Club Name:** The name of the football club.
+- **Total Market Value:** Total market value for each club.
+- **Included Players:** The number of players in each club.
+
+### Explanation:
+This query joins the `rm564_football_clubs` and `rm564_football_clubs_players` tables on the `club_id`, aggregates player statistics for each club calculates the total market value and number of players included. The dataset sorted by total market value for the each club.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- **Python 3.12**
+- **Databricks Connection** (or alternative cloud SQL database)
+- **GitHub Actions for CI/CD**
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database.git
+cd Ramil-Python-Script-interacting-with-SQL-Database
+```
+
+2. Install dependencies:
+
+```bash
+make install
+```
+
+3. Set up environment variables:
+
+- Create a `.env` file in the root directory with the following variables:
+
+```
+SERVER_HOSTNAME=your_databricks_server_hostname
+HTTP_PATH=your_http_path
+ACCESS_TOKEN=your_access_token
+```
+
+### Running the Script
+
+1. Extract CSV files and load data into the database:
+   ```bash
    python main.py
    ```
-## Database Operations
-The script performs the following operations on the database:
-1. **Create**: Inserts new records into the database.
-2. **Read**: Queries the database and retrieves data.
-3. **Update**: Updates existing records.
-4. **Delete**: Removes records from the database.
 
-### SQL Queries
-The script includes at least two different SQL queries:
-- Query 1: This SQL query retrieves information about the number of NBA players drafted in each year by their draft position. 
-- Query 2: This SQL query retrieves the average superstar rating of players by their position and draft year, but only includes combinations where the average superstar value is greater than 0.02.
+2. Execute queries:
+   - You can run specific SQL queries using the `execute_query` or `fetchall_result` functions.
+
+### Running Tests
+
+To run the tests:
+
+```bash
+make test_file
+```
+
+To run the format:
+
+```bash
+make format
+```
+
+To run the lint:
+
+```bash
+make lint
+```
+
+
+---
 
 ## CI/CD Pipeline
-A GitHub Actions CI/CD pipeline is configured to:
-- Test the database connection.
-- Ensure CRUD operations work correctly.
-- Validate SQL queries.
 
-## Screenshots
-### Insert Operation
-![Insert Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Insert_Operation.png)
+The repository uses GitHub Actions for continuous integration and deployment. Every commit triggers the CI pipeline, which:
+- Runs automated tests on the Python codebase.
+- Ensures the SQL query and database interactions work as expected.
 
----
+### Running the Pipeline Locally
 
-### Analytic Query 1
-![Analytic Query 1](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Analytic_Query1.png)
+You can use GitHub Actions for CI, and Docker to replicate the CI environment locally if desired.
 
 ---
 
-### Analytic Query 2
-![Analytic Query 2](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Analtyic_Query2.png)
+## Grading Criteria
 
----
+1. **Query Functionality (20 points):**
+    - The SQL query properly joins, aggregates, and sorts data, providing accurate results for football clubs and their players.
 
-### Delete Operation
-![Delete Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Delete_Opertion.png)
+2. **Explanation and Documentation (20 points):**
+    - Clear explanation of the query and its expected results, including documentation of the Python scripts and their purpose.
 
----
+3. **CI/CD Pipeline (10 points):**
+    - A functional CI/CD pipeline using GitHub Actions that ensures the project runs tests automatically with each commit.
 
-### Read Operation
-![Read Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Read_Operation.png)
-
----
-
-### Read Operation 2
-![Read Operation 2](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Read_Operation2.png)
-
----
-
-### Transformation (ETL)
-![Transformation (ETL)](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Transformation(elt).png)
-
----
-
-### Update Operation
-![Update Operation](https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database/blob/cdef65a8c0705cad1f2bacbf51a872c555e679ad/images/Update_Operation.png)
-
----
-
-
+4. **README.md (10 points):**
+    - This `README.md` provides comprehensive instructions for setting up, running, and testing the project.
