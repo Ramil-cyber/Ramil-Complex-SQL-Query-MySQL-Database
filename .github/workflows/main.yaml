@@ -10,8 +10,8 @@ jobs:
   build:
     strategy:
       matrix:
-        python-version: [3.11, 3.12]
-        os: [ubuntu-latest, windows-latest]
+        python-version: [3.12]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     env:
       SERVER_HOSTNAME: ${{ secrets.SERVER_HOSTNAME }}
