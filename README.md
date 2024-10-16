@@ -1,3 +1,4 @@
+[![CI Pipeline](https://github.com/Ramil-cyber/Ramil-Complex-SQL-Query-MySQL-Database/actions/workflows/main.yaml/badge.svg)](https://github.com/Ramil-cyber/Ramil-Complex-SQL-Query-MySQL-Database/actions/workflows/main.yaml)
 
 # Ramil's Python Script Interacting with SQL Database
 
