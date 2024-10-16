@@ -126,18 +126,3 @@ The repository uses GitHub Actions for continuous integration and deployment. Ev
 
 You can use GitHub Actions for CI, and Docker to replicate the CI environment locally if desired.
 
----
-
-## Grading Criteria
-
-1. **Query Functionality (20 points):**
-    - The SQL query properly joins, aggregates, and sorts data, providing accurate results for football clubs and their players.
-
-2. **Explanation and Documentation (20 points):**
-    - Clear explanation of the query and its expected results, including documentation of the Python scripts and their purpose.
-
-3. **CI/CD Pipeline (10 points):**
-    - A functional CI/CD pipeline using GitHub Actions that ensures the project runs tests automatically with each commit.
-
-4. **README.md (10 points):**
-    - This `README.md` provides comprehensive instructions for setting up, running, and testing the project.
