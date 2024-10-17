@@ -64,8 +64,8 @@ This query joins the `rm564_football_clubs` and `rm564_football_clubs_players` t
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/nogibjj/Ramil-Python-Script-interacting-with-SQL-Database.git
-cd Ramil-Python-Script-interacting-with-SQL-Database
+git clone https://github.com/nogibjj/Ramil-Complex-SQL-Query-MySQL-Database.git
+cd Ramil-Complex-SQL-Query-MySQL-Database
 ```
 
 2. Install dependencies:
